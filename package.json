@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "name": "scra",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
+  "license": "MIT"
+}
