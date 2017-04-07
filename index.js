@@ -1,1 +1,1 @@
-module.exports = require('./lib/scra');
+module.exports = require('promy')(require('./lib/scra'));

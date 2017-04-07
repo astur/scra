@@ -5,5 +5,8 @@
   "description": "",
   "main": "index.js",
   "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
+  "dependencies": {
+    "promy": "^0.1.0"
+  },
   "license": "MIT"
 }
