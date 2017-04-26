@@ -14,3 +14,12 @@ describe('GET', () => {
             .then((res)=>done(), (err)=>done('false eror is raised'));
     });
 });
+
+describe('JSON', () => {
+    it('should parse JSON response to object', (done) => {
+        scra({url: 'http://httpbin.org/user-agent'}).then(
+            (res)=>done(res.body['user-agent'] === 'astur/scra' ? undefined : 'json parse error'),
+            (err)=>done('false eror is raised')
+        );
+    });
+});
