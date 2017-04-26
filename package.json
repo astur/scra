@@ -9,6 +9,7 @@
   },
   "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
   "dependencies": {
+    "iconv-lite": "^0.4.16",
     "promy": "^0.1.0"
   },
   "devDependencies": {
