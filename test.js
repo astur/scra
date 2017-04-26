@@ -29,3 +29,18 @@ describe('JSON', () => {
         );
     });
 });
+
+describe('Compression', () => {
+    it('should decode Gzip-compressed response', (done) => {
+        scra({url: 'http://httpbin.org/gzip'}).then(
+            (res)=>done(res.body.gzipped ? undefined : 'gzip error'),
+            (err)=>done('false eror is raised')
+        );
+    });
+    it('should decode Deflate-compressed response', (done) => {
+        scra({url: 'http://httpbin.org/deflate'}).then(
+            (res)=>done(res.body.deflated ? undefined : 'gzip error'),
+            (err)=>done('false eror is raised')
+        );
+    });
+});
