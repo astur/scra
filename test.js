@@ -22,4 +22,10 @@ describe('JSON', () => {
             (err)=>done('false eror is raised')
         );
     });
+    it('should not parse HTML response to object', (done) => {
+        scra({url: 'http://httpbin.org/html'}).then(
+            (res)=>done(typeof res.body === 'string' ? undefined : 'unnecessary json parse error'),
+            (err)=>done('false eror is raised')
+        );
+    });
 });
