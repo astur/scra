@@ -44,3 +44,12 @@ describe('Compression', () => {
         );
     });
 });
+
+describe('Cookies', () => {
+    it('should send cookies from options', (done) => {
+        scra({url: 'http://httpbin.org/cookies', cookies: {a: 1}}).then(
+            (res)=>done(res.body.cookies.a === '1' ? undefined : 'cookies error'),
+            (err)=>done('false eror is raised')
+        );
+    });
+});
