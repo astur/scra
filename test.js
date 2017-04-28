@@ -52,4 +52,10 @@ describe('Cookies', () => {
             (err)=>done('false eror is raised')
         );
     });
+    it('should store cookies in response', (done) => {
+        scra({url: 'http://httpbin.org/cookies/set?a=1'}).then(
+            (res)=>done(res.cookies.a === '1' ? undefined : 'cookies error'),
+            (err)=>done('false eror is raised')
+        );
+    });
 });
