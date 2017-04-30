@@ -15,6 +15,23 @@ describe('GET', () => {
     });
 });
 
+describe('POST', () => {
+    it('should perform post request with easy form data', (done) => {
+        scra({url: 'http://httpbin.org/post', data: 'a=1&b=2'})
+            .then(
+                (res)=>done(res.body.form.a === '1' && res.body.form.b === '2' ? undefined : 'post error'),
+                (err)=>done('false eror is raised')
+            );
+    });
+    it('should perform post request with plain text', (done) => {
+        scra({url: 'http://httpbin.org/post', data: 'test', headers: {'Content-Type': 'plain/text'}})
+            .then(
+                (res)=>done(res.body.data === 'test' ? undefined : 'post error'),
+                (err)=>done('false eror is raised')
+            );
+    });
+});
+
 describe('JSON', () => {
     it('should parse JSON response to object', (done) => {
         scra({url: 'http://httpbin.org/user-agent'}).then(
