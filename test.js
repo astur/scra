@@ -45,6 +45,13 @@ describe('JSON', () => {
             (err)=>done('false eror is raised')
         );
     });
+    it('should perform post request with json', (done) => {
+        scra({url: 'http://httpbin.org/post', data: {a: 1, b: 2}})
+            .then(
+                (res)=>done(res.body.json.a === 1 && res.body.json.b === 2 ? undefined : 'post error'),
+                (err)=>done('false eror is raised')
+            );
+    });
 });
 
 describe('Compression', () => {
