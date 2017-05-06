@@ -5,6 +5,10 @@ describe('GET', () => {
         scra('http://httpbin.org/get')
             .then((res)=>done(), (err)=>done('false eror is raised'));
     });
+    it('should perform request url w/o protocol', (done) => {
+        scra('httpbin.org/get')
+            .then((res)=>done(), (err)=>done('false eror is raised'));
+    });
     it('should perform request with url in object field', (done) => {
         scra({url: 'http://httpbin.org/get'})
             .then((res)=>done(), (err)=>done('false eror is raised'));
