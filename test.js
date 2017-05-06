@@ -79,3 +79,14 @@ describe('Cookies', () => {
         );
     });
 });
+
+describe('Timeout', () => {
+    it('should abort long request by timeout', (done) => {
+        scra({url: 'http://httpbin.org/delay/10', timeout: 1000})
+            .then((res)=>done('timeout error'), (err)=>done());
+    });
+    it('should not abort quick request by timeout', (done) => {
+        scra({url: 'http://httpbin.org/get', timeout: 10000})
+            .then((res)=>done(), (err)=>done('timeout error'));
+    });
+});
