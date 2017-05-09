@@ -1,11 +1,15 @@
 {
   "private": true,
   "name": "scra",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Really simple HTTP client. Mainly for scraping but not only.",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/astur/scra.git"
   },
   "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
   "dependencies": {
@@ -16,5 +20,22 @@
   "devDependencies": {
     "mocha": "^3.2.0"
   },
+  "keywords": [
+    "http",
+    "https",
+    "request",
+    "client",
+    "scraping",
+    "simple",
+    "url",
+    "uri",
+    "util",
+    "utility",
+    "curl",
+    "wget",
+    "fetch",
+    "get",
+    "post"
+  ],
   "license": "MIT"
 }
