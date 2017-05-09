@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "scra",
   "version": "0.1.0",
   "description": "Really simple HTTP client. Mainly for scraping but not only.",
