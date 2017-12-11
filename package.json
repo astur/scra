@@ -34,7 +34,8 @@
     "wget",
     "fetch",
     "get",
-    "post"
+    "post",
+    "json"
   ],
   "license": "MIT"
 }
