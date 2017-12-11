@@ -1,6 +1,9 @@
 # scra
 
-HTTP client, designed mainly for scraping web sites. It is not so complicated as famous [request](https://github.com/request/request), but it is really simple tool for geting html pages for parsing data or json responses from site internal API. Sometime "_less is more_". 
+HTTP client, designed mainly for scraping web sites. It is not so complicated as famous [request](https://github.com/request/request), but it is really simple tool for geting html pages for parsing data or json responses from site internal API. Sometime "_less is more_".
+
+[![Build Status][travis-image]][travis-url]
+[![NPM version][npm-image]][npm-url] 
 
 ## Features
 
@@ -80,3 +83,8 @@ See more examples in test.
 ## License
 
 MIT
+
+[npm-url]: https://npmjs.org/package/scra
+[npm-image]: https://badge.fury.io/js/scra.svg
+[travis-url]: https://travis-ci.org/astur/scra
+[travis-image]: https://travis-ci.org/astur/scra.svg?branch=master
