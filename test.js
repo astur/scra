@@ -1,3 +1,5 @@
+/*eslint handle-callback-err: "off"*/
+/* eslint-env node, mocha */
 const scra = require('.');
 
 describe('GET', () => {
