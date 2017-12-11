@@ -74,6 +74,7 @@ See more examples in test.
 * `cookies` - key-value object with cookies from `cookies` option and from `set-cookie` response header.
 * `url` - same as `url` field in options.
 * `requestTime` - request duration (number of milliseconds).
+* `timings` - detailed timings (timestamps of all request phases).
 * `bytes` - just how many `bytes.sent` and `bytes.received` by this request.
 
 ## License
