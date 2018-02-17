@@ -1,6 +1,6 @@
 {
   "name": "scra",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Really simple HTTP client. Mainly for scraping but not only.",
   "main": "index.js",
   "scripts": {
