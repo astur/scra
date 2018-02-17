@@ -18,6 +18,8 @@ HTTP client, designed mainly for scraping web sites. It is not so complicated as
 
 ## Install
 
+_(node '>=8.0.0' required)_
+
 ```bash
 npm install scra
 ```

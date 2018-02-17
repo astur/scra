@@ -10,6 +10,9 @@
     "type": "git",
     "url": "https://github.com/astur/scra.git"
   },
+  "engines": {
+    "node": ">=8.0.0"
+  },
   "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
   "dependencies": {
     "c-e": "^1.0.1",
