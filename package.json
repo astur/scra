@@ -12,6 +12,7 @@
   },
   "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
   "dependencies": {
+    "c-e": "^1.0.1",
     "eslint": "^4.13.0",
     "eslint-config-astur": "0.0.2",
     "iconv-lite": "^0.4.16",
