@@ -17,6 +17,7 @@
     "eslint-config-astur": "0.0.2",
     "iconv-lite": "^0.4.16",
     "promy": "^0.1.0",
+    "rfc-3986": "^1.0.1",
     "tunnel-agent": "^0.6.0"
   },
   "devDependencies": {
