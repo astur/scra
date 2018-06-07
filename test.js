@@ -1,11 +1,18 @@
 const test = require('ava');
 const scra = require('.');
+const zlib = require('zlib');
+const promisify = require('util').promisify;
 const mockser = require('mockser');
 const s = mockser();
+const answer = 'Lorem ipsum';
 
 test.before('setup', async () => {
+    const compressed = {
+        gzip: await promisify(zlib.gzip)(answer),
+        deflate: await promisify(zlib.deflate)(answer),
+    };
     s.on('/', (req, res) => {
-        res.end('ok');
+        res.end(answer);
     });
     s.on('/post', (req, res) => {
         res.setHeader('Request-Content-Type', req.headers['content-type']);
@@ -19,12 +26,24 @@ test.before('setup', async () => {
         res.setHeader('Content-Type', 'application/json');
         res.end('text');
     });
+    s.on('/gzip', (req, res) => {
+        res.setHeader('Response-Accept-Encoding', 'gzip, deflate');
+        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Encoding', 'gzip');
+        res.end(compressed.gzip);
+    });
+    s.on('/deflate', (req, res) => {
+        res.setHeader('Response-Accept-Encoding', 'gzip, deflate');
+        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Encoding', 'deflate');
+        res.end(compressed.deflate);
+    });
     s.on('/cookie', (req, res) => {
         res.setHeader('Set-Cookie', ['a=1; Path=/']);
         res.end(req.headers.cookie);
     });
     s.on('/delay', (req, res) => {
-        setTimeout(() => res.end('ok'), 5000);
+        setTimeout(() => res.end(answer), 5000);
     });
     await s.listen(1703);
 });
@@ -81,7 +100,16 @@ test('JSON', async t => {
     });
 });
 
-test.todo('Compression');
+test('Compression', async t => {
+    await scra({url: 'localhost:1703/gzip', compressed: true}).then(res => {
+        t.is(res.body, answer);
+        t.is(res.headers['response-accept-encoding'], 'gzip, deflate');
+    });
+    await scra({url: 'localhost:1703/deflate', compressed: true}).then(res => {
+        t.is(res.body, answer);
+        t.is(res.headers['response-accept-encoding'], 'gzip, deflate');
+    });
+});
 
 test('Cookies', async t => {
     await scra({url: 'localhost:1703/cookie', cookies: {a: 1, b: 2}}).then(res => {
