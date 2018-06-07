@@ -15,16 +15,16 @@
   },
   "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
   "dependencies": {
-    "c-e": "^1.0.1",
+    "c-e": "^1.0.3",
     "iconv-lite": "^0.4.16",
-    "promy": "^0.1.0",
+    "promy": "^1.0.1",
     "rfc-3986": "^1.0.1",
     "tunnel-agent": "^0.6.0"
   },
   "devDependencies": {
     "eslint": "^4.13.0",
     "eslint-config-astur": "0.0.2",
-    "mocha": "^3.2.0"
+    "mocha": "^5.2.0"
   },
   "keywords": [
     "http",
