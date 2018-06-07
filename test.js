@@ -2,6 +2,7 @@ const test = require('ava');
 const scra = require('.');
 const zlib = require('zlib');
 const promisify = require('util').promisify;
+const keyCert = require('key-cert');
 const mockser = require('mockser');
 const s = mockser();
 const answer = 'Lorem ipsum';
@@ -72,6 +73,16 @@ test('response fields', async t => {
     t.true('end' in res.timings);
     t.true('sent' in res.bytes);
     t.true('received' in res.bytes);
+});
+
+test('HTTPS', async t => {
+    const ss = mockser(await keyCert());
+    ss.on('/', (req, res) => {
+        res.end('ok');
+    });
+    await ss.listen(1704);
+    await scra('https://localhost:1704').then(() => t.pass(), e => t.fail(e));
+    await ss.close();
 });
 
 test('POST', async t => {

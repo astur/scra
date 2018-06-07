@@ -25,6 +25,7 @@
     "ava": "^0.25.0",
     "eslint": "^4.13.0",
     "eslint-config-astur": "0.0.2",
+    "key-cert": "^1.0.0",
     "mockser": "^1.0.1"
   },
   "keywords": [
