@@ -4,7 +4,7 @@
   "description": "Really simple HTTP client. Mainly for scraping but not only.",
   "main": "index.js",
   "scripts": {
-    "test": "eslint . && mocha"
+    "test": "eslint . && ava"
   },
   "repository": {
     "type": "git",
@@ -22,9 +22,9 @@
     "tunnel-agent": "^0.6.0"
   },
   "devDependencies": {
+    "ava": "^0.25.0",
     "eslint": "^4.13.0",
-    "eslint-config-astur": "0.0.2",
-    "mocha": "^5.2.0"
+    "eslint-config-astur": "0.0.2"
   },
   "keywords": [
     "http",
