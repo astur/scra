@@ -17,6 +17,7 @@
   "dependencies": {
     "c-e": "^1.0.3",
     "iconv-lite": "^0.4.16",
+    "prepend-http": "^2.0.0",
     "promy": "^1.0.1",
     "rfc-3986": "^1.0.1",
     "tunnel-agent": "^0.6.0"
