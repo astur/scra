@@ -97,7 +97,9 @@ test('HTTPS', async t => {
         res.end('ok');
     });
     await ss.listen(1704);
-    await scra('https://localhost:1704').then(() => t.pass(), e => t.fail(e));
+    await scra('https://localhost:1704').then(res => {
+        t.true('secureConnect' in res.timings);
+    });
     await ss.close();
 });
 
