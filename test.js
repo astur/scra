@@ -6,6 +6,7 @@ const keyCert = require('key-cert');
 const mockser = require('mockser');
 const s = mockser();
 const answer = 'Lorem ipsum';
+const {URIError, TimeoutError, NetworkError} = require('./lib/errors');
 
 test.before('setup', async () => {
     const compressed = {
@@ -53,6 +54,21 @@ test('url', async t => {
     await scra('http://localhost:1703').then(() => t.pass(), e => t.fail(e));
     await scra('localhost:1703').then(() => t.pass(), e => t.fail(e));
     await scra({url: 'http://localhost:1703'}).then(() => t.pass(), e => t.fail(e));
+    await scra('').then(() => t.fail(), e => {
+        t.true(e instanceof URIError);
+    });
+    await scra({}).then(() => t.fail(), e => {
+        t.true(e instanceof URIError);
+    });
+    await scra({url: 1}).then(() => t.fail(), e => {
+        t.true(e instanceof URIError);
+    });
+    await scra(':::').then(() => t.fail(), e => {
+        t.true(e instanceof URIError);
+    });
+    await scra('https://localhost:1703').then(() => t.fail(), e => {
+        t.true(e instanceof NetworkError);
+    });
 });
 
 test('response fields', async t => {
@@ -131,7 +147,7 @@ test('Cookies', async t => {
 
 test('Timeout', async t => {
     await scra({url: 'localhost:1703/delay', timeout: 500}).then(() => t.fail(), e => {
-        t.true(e instanceof Error);
+        t.true(e instanceof TimeoutError);
     });
     await scra({url: 'localhost:1703', timeout: 10000}).then(() => t.pass(), e => t.fail(e));
 });
