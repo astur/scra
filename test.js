@@ -40,7 +40,7 @@ test.before('setup', async () => {
         res.end(compressed.deflate);
     });
     s.on('/cookie', (req, res) => {
-        res.setHeader('Set-Cookie', ['a=1; Path=/']);
+        res.setHeader('Set-Cookie', ['a=%34%32; Path=/', 'b="%80"; Path=/']);
         res.end(req.headers.cookie);
     });
     s.on('/delay', (req, res) => {
@@ -123,9 +123,9 @@ test('Compression', async t => {
 });
 
 test('Cookies', async t => {
-    await scra({url: 'localhost:1703/cookie', cookies: {a: 1, b: 2}}).then(res => {
-        t.is(res.cookies.a, '1');
-        t.is(res.body, 'a=1; b=2');
+    await scra({url: 'localhost:1703/cookie', cookies: {A: 1, B: 2}}).then(res => {
+        t.deepEqual(res.cookies, {a: '42', b: '%80', A: 1, B: 2});
+        t.is(res.body, 'A=1; B=2');
     });
 });
 
