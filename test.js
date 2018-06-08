@@ -29,13 +29,13 @@ test.before('setup', async () => {
         res.end('text');
     });
     s.on('/gzip', (req, res) => {
-        res.setHeader('Response-Accept-Encoding', 'gzip, deflate');
+        res.setHeader('Response-Accept-Encoding', req.headers['accept-encoding']);
         res.setHeader('Content-Type', 'text/plain');
         res.setHeader('Content-Encoding', 'gzip');
         res.end(compressed.gzip);
     });
     s.on('/deflate', (req, res) => {
-        res.setHeader('Response-Accept-Encoding', 'gzip, deflate');
+        res.setHeader('Response-Accept-Encoding', req.headers['accept-encoding']);
         res.setHeader('Content-Type', 'text/plain');
         res.setHeader('Content-Encoding', 'deflate');
         res.end(compressed.deflate);
