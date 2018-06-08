@@ -8,6 +8,7 @@ const mockser = require('mockser');
 const s = mockser();
 const answer = 'Lorem ipsum';
 const {URIError, TimeoutError, NetworkError} = require('./lib/errors');
+const agent = new (require('http')).Agent({maxFreeSockets: 128});
 
 test.before('setup', async () => {
     const compressed = {
@@ -186,6 +187,10 @@ test('Timeout', async t => {
         t.true(e instanceof TimeoutError);
     });
     await scra({url: 'localhost:1703', timeout: 10000}).then(() => t.pass(), e => t.fail(e));
+});
+
+test('Agent', async t => {
+    await scra({url: 'localhost:1703', agent}).then(() => t.pass(), e => t.fail(e));
 });
 
 test.after('cleanup', async () => {
