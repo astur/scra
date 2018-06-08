@@ -1,6 +1,7 @@
 const test = require('ava');
 const scra = require('.');
 const zlib = require('zlib');
+const iconv = require('iconv-lite');
 const promisify = require('util').promisify;
 const keyCert = require('key-cert');
 const mockser = require('mockser');
@@ -27,6 +28,18 @@ test.before('setup', async () => {
     s.on('/badJSON', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.end('text');
+    });
+    s.on('/charset', (req, res) => {
+        res.setHeader('Content-Type', 'text/html; charset=win1251');
+        res.end(iconv.encode('<p>Лорем ипсум</p>', 'win1251'));
+    });
+    s.on('/charset/bad', (req, res) => {
+        res.setHeader('Content-Type', 'text/html; charset=bad123');
+        res.end(answer);
+    });
+    s.on('/text', (req, res) => {
+        res.setHeader('Content-Type', 'text/html');
+        res.end(answer);
     });
     s.on('/gzip', (req, res) => {
         res.setHeader('Response-Accept-Encoding', req.headers['accept-encoding']);
@@ -126,6 +139,27 @@ test('JSON', async t => {
     await scra({url: 'localhost:1703/badJSON'}).then(res => {
         t.is(res.headers['content-type'], 'application/json');
         t.is(res.body, 'text');
+    });
+});
+
+test('charset', async t => {
+    await scra({url: 'localhost:1703/charset'}).then(res => {
+        t.is(res.body, '<p>Лорем ипсум</p>');
+        t.is(res.charset, 'win1251');
+    });
+});
+
+test('charset/bad', async t => {
+    await scra({url: 'localhost:1703/charset/bad'}).then(res => {
+        t.is(res.body, answer);
+        t.is(res.charset, 'bad123');
+    });
+});
+
+test('text', async t => {
+    await scra({url: 'localhost:1703/text'}).then(res => {
+        t.is(res.body, answer);
+        t.is(res.charset, 'iso-8859-1');
     });
 });
 
