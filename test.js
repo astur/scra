@@ -86,11 +86,11 @@ test('url', async t => {
 
 test('response fields', async t => {
     const res = await scra('localhost:1703');
-    t.true('url' in res);
-    t.true('body' in res);
-    t.true('rawBody' in res);
-    t.true('charset' in res);
-    t.true('cookies' in res);
+    t.is(res.url, 'http://localhost:1703');
+    t.is(res.body, answer);
+    t.is(res.rawBody.toString(), answer);
+    t.is(res.charset, 'utf-8');
+    t.deepEqual(res.cookies, {});
     t.true('requestTime' in res);
     t.true('timings' in res);
     t.true('bytes' in res);
