@@ -186,7 +186,7 @@ test('Timeout', async t => {
     await scra({url: 'localhost:1703/delay', timeout: 500}).then(() => t.fail(), e => {
         t.true(e instanceof TimeoutError);
     });
-    await scra({url: 'localhost:1703', timeout: 10000}).then(() => t.pass(), e => t.fail(e));
+    await scra({url: 'localhost:1703', timeout: 0}).then(() => t.pass(), e => t.fail(e));
 });
 
 test('Agent', async t => {
