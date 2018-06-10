@@ -65,9 +65,10 @@ test.before('setup', async () => {
 });
 
 test('url', async t => {
-    await scra('http://localhost:1703').then(() => t.pass(), e => t.fail(e));
-    await scra('localhost:1703').then(() => t.pass(), e => t.fail(e));
-    await scra({url: 'http://localhost:1703'}).then(() => t.pass(), e => t.fail(e));
+    await scra('http://localhost:1703').then(() => t.pass());
+    await scra('localhost:1703').then(() => t.pass());
+    await scra({url: 'http://localhost:1703'}).then(() => t.pass());
+    await scra({url: 'http://localhost:1703', proxy: 'localhost:3128'}).then(() => t.pass());
     await scra('').then(() => t.fail(), e => {
         t.true(e instanceof URIError);
     });
@@ -112,6 +113,9 @@ test('HTTPS', async t => {
     });
     await ss.listen(1704);
     await scra('https://localhost:1704').then(res => {
+        t.true('secureConnect' in res.timings);
+    });
+    await scra({url: 'https://localhost:1704', proxy: 'localhost:3128'}).then(res => {
         t.true('secureConnect' in res.timings);
     });
     await ss.close();
@@ -186,11 +190,11 @@ test('Timeout', async t => {
     await scra({url: 'localhost:1703/delay', timeout: 500}).then(() => t.fail(), e => {
         t.true(e instanceof TimeoutError);
     });
-    await scra({url: 'localhost:1703', timeout: 0}).then(() => t.pass(), e => t.fail(e));
+    await scra({url: 'localhost:1703', timeout: 0}).then(() => t.pass());
 });
 
 test('Agent', async t => {
-    await scra({url: 'localhost:1703', agent}).then(() => t.pass(), e => t.fail(e));
+    await scra({url: 'localhost:1703', agent}).then(() => t.pass());
 });
 
 test.after('cleanup', async () => {
