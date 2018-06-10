@@ -185,9 +185,9 @@ test('Compression', async t => {
 });
 
 test('Cookies', async t => {
-    await scra({url: 'localhost:1703/cookie', cookies: {A: 1, B: 2}}).then(res => {
-        t.deepEqual(res.cookies, {a: '42', b: '%80', A: 1, B: 2});
-        t.is(res.body, 'A=1; B=2');
+    await scra({url: 'localhost:1703/cookie', cookies: {b: 'bla', c: 42}}).then(res => {
+        t.deepEqual(res.cookies, {a: '42', b: '%80', c: 42});
+        t.is(res.body, 'b=bla; c=42');
     });
 });
 
