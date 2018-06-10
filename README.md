@@ -78,6 +78,7 @@ See more examples in test.
 * `body` - response body converted to string (using `iconv-lite` if `charset` defined.) If `content-type` response header is `application/json` then `body` will be object parsed from json.
 * `cookies` - key-value object with cookies from `cookies` option and from `set-cookie` response header.
 * `url` - same as `url` field in options.
+* `requestHeaders` - object with headers sent with request.
 * `requestTime` - request duration (number of milliseconds).
 * `timings` - detailed timings (timestamps of all request phases).
 * `bytes` - just how many `bytes.sent` and `bytes.received` by this request.

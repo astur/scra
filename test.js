@@ -93,6 +93,11 @@ test('response fields', async t => {
     t.is(res.rawBody.toString(), answer);
     t.is(res.charset, 'utf-8');
     t.deepEqual(res.cookies, {});
+    t.deepEqual(res.requestHeaders, {
+        connection: 'close',
+        'user-agent': 'astur/scra',
+        accept: '*/*',
+    });
     t.true('requestTime' in res);
     t.true('timings' in res);
     t.true('bytes' in res);
