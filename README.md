@@ -8,7 +8,7 @@ HTTP client, designed mainly for scraping web sites. It is not so complicated as
 ## Features
 
 * GET and POST requests via HTTP/HTTPS
-* Proxy support via [tunnel-agent](https://github.com/request/tunnel-agent)
+* Proxy support via [proxy-agent](https://github.com/TooTallNate/node-proxy-agent)
 * Non-utf8 charset decoding via [iconv-lite](https://github.com/ashtuchkin/iconv-lite)
 * Auto decompression gzip/deflate
 * Easy JSON-API support
@@ -68,7 +68,7 @@ See more examples in test.
 * `cookies` - cookies to be sent with request. Key-value object. It will be stringified and placed to `cookie` header.
 * `compressed` - Boolean. If `true` set `accept-encoding` header to `'gzip, deflate'`. Defaults to `false`.
 * `timeout` - Number of milliseconds. Time limit for request to be done (if not - error will be thrown). If `timeout set to `0` it means no time limit. Defaults to 5000.
-* `proxy` - address of proxy server. It may be both, `http` or `https`, and if protocol is omitted it will be `'http:'`. `scra` supports proxy via `tunnel-agent`, so you can use proxy with `https` sites.
+* `proxy` - address of proxy server. It may be both, `http` or `https`, and if protocol is omitted it will be `'http:'`. `scra` supports proxy via `proxy-agent`, so you can use proxy with `https` sites.
 * `agent` - custom [http](https://nodejs.org/api/http.html#http_class_http_agent)/[https](https://nodejs.org/api/https.html#https_class_https_agent) agent.
 
 #### Response object extra fields:
