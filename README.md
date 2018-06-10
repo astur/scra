@@ -8,12 +8,14 @@ HTTP client, designed mainly for scraping web sites. It is not so complicated as
 ## Features
 
 * GET and POST requests via HTTP/HTTPS
+* Supports both promise way and callback way
 * Proxy support via [proxy-agent](https://github.com/TooTallNate/node-proxy-agent)
 * Non-utf8 charset decoding via [iconv-lite](https://github.com/ashtuchkin/iconv-lite)
 * Auto decompression gzip/deflate
 * Easy JSON-API support
 * Cookies parsing/serialization
 * Useful request fields
+* Informative custom errors via [c-e](https://github.com/astur/c-e)
 * No any superfluous things
 
 ## Install
@@ -67,8 +69,8 @@ See more examples in test.
 * `data` - data for POST request. If `data` is a string with length more then 0 - this string will be sent as a request body without any conversions (if `content-type` header is not set it will be `application/x-www-form-urlencoded`). If `data` is an object it will be stringified to json and sent as a request body (`content-type` header will be `application/json`).
 * `cookies` - cookies to be sent with request. Key-value object. It will be stringified and placed to `cookie` header.
 * `compressed` - Boolean. If `true` set `accept-encoding` header to `'gzip, deflate'`. Defaults to `false`.
-* `timeout` - Number of milliseconds. Time limit for request to be done (if not - error will be thrown). If `timeout set to `0` it means no time limit. Defaults to 5000.
-* `proxy` - address of proxy server. It may be both, `http` or `https`, and if protocol is omitted it will be `'http:'`. `scra` supports proxy via `proxy-agent`, so you can use proxy with `https` sites.
+* `timeout` - Number of milliseconds. Time limit for request to be done (if not - error will be thrown). If `timeout` set to `0` it means no time limit. Defaults to `5000`.
+* `proxy` - address of proxy server. It may be both, `http` or `https`, and if protocol is omitted it will be `'http:'`. Now `scra` supports proxy via `proxy-agent`, so you can use proxy with `https` sites.
 * `agent` - custom [http](https://nodejs.org/api/http.html#http_class_http_agent)/[https](https://nodejs.org/api/https.html#https_class_https_agent) agent.
 
 #### Response object extra fields:
