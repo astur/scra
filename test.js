@@ -7,7 +7,7 @@ const keyCert = require('key-cert');
 const mockser = require('mockser');
 const s = mockser();
 const answer = 'Lorem ipsum';
-const {URIError, TimeoutError, NetworkError} = require('./lib/errors');
+const {TimeoutError, NetworkError} = require('./lib/errors');
 const agent = new (require('http')).Agent({maxFreeSockets: 128});
 
 test.before('setup', async () => {
@@ -74,12 +74,16 @@ test('url', async t => {
     });
     await scra({}).then(() => t.fail(), e => {
         t.true(e instanceof URIError);
+        t.is(e.message, 'URL not specified');
     });
     await scra({url: 1}).then(() => t.fail(), e => {
         t.true(e instanceof URIError);
+        t.is(e.message, 'URL not specified');
     });
     await scra(':::').then(() => t.fail(), e => {
         t.true(e instanceof URIError);
+        t.is(e.message, 'Invalid URL');
+        t.is(e.url, 'http://:::');
     });
     await scra('https://localhost:1703').then(() => t.fail(), e => {
         t.true(e instanceof NetworkError);
