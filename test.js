@@ -102,6 +102,7 @@ test('response fields', async t => {
         'user-agent': 'astur/scra',
         accept: '*/*',
     });
+    t.is(res.options, 'localhost:1703');
     t.true('requestTime' in res);
     t.true('timings' in res);
     t.true('bytes' in res);
