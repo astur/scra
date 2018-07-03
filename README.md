@@ -85,6 +85,23 @@ See more examples in test.
 * `timings` - detailed timings (timestamps of all request phases).
 * `bytes` - just how many `bytes.sent` and `bytes.received` by this request.
 
+#### Custom errors
+
+`scra` provides two custom error classes:
+
+```js
+const scra = require('scra');
+const {TimeoutError, NetworkError} = scra;
+```
+
+These errors contain several useful additional properties:
+
+* `url` - url used in current request.
+* `errorTime` - timestamp of the moment when error was thrown.
+* `timings` - same as in response field (but maybe some timings will be missing because the error occurred before corresponding phases).
+* `timeout` - (only in `TimeoutError`) value of timeout option.
+* `cause` - (only in `NetworkError`) error object, thrown by core `http` module.
+
 ## License
 
 MIT
