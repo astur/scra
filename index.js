@@ -1,1 +1,1 @@
-module.exports = require('promy')(require('./lib/scra'));
+module.exports = Object.assign(require('promy')(require('./lib/scra')), require('./lib/errors'));

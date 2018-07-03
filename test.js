@@ -7,7 +7,7 @@ const keyCert = require('key-cert');
 const mockser = require('mockser');
 const s = mockser();
 const answer = 'Lorem ipsum';
-const {TimeoutError, NetworkError} = require('./lib/errors');
+const {TimeoutError, NetworkError} = scra;
 const agent = new (require('http')).Agent({maxFreeSockets: 128});
 
 test.before('setup', async () => {
