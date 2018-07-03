@@ -82,7 +82,22 @@ See more examples in test.
 * `url` - same as `url` field in options.
 * `requestHeaders` - object with headers sent with request.
 * `requestTime` - request duration (number of milliseconds).
-* `timings` - detailed timings (timestamps of all request phases).
+* `timings` - (milliseconds) detailed timings (timestamps of all request phases):
+  * `start` - time when request starts. Just moment before calling `http(s).request`.
+  * `socket` - time when socket has been created (when the `http(s)` module's `socket` event fires).
+  * `lookup` - time when DNS has been resolved (when the `net` module's `lookup` event fires).
+  * `connect` - time when the server acknowledges the TCP connection (when the `net` module's `connect` event fires).
+  * `secureConnect` - (https only) time when TLS handshake has been completed (when the `tls` module's `secureConnect` event fires).
+  * `responce` - time when server delivers first byte of response (when the `http(s)` module's `responce` event fires).
+  * `end` - time when all responce data has been received (when the `http(s)` module's `end` event fires).
+* `timingPhases` - (milliseconds) relative durations of each request phase:
+  * `wait` - time spent waiting for socket (`timings.socket - timings.start`).
+  * `dns` - time spent performing the DNS lookup (`timings.lookup - timings.socket`).
+  * `tcp` - time it took to establish TCP connection between a source host and destination host (`timings.connect - timings.lookup`).
+  * `tls` - time spent completing a TLS handshake (`timings.secureConnect - timings.connect`).
+  * `responce` - time spent waiting for the initial response (`timings.responce - (timings.secureConnect || timings.connect)`).
+  * `read` - time spent receiving the response data (`timings.end - timings.responce`).
+  * `total` - time spent performing all phases of request (`timings.end - timings.start`).
 * `bytes` - just how many `bytes.sent` and `bytes.received` by this request.
 * `options` - raw `scra` options as string or object.
 
@@ -100,6 +115,7 @@ These errors contain several useful additional properties:
 * `url` - url used in current request.
 * `errorTime` - timestamp of the moment when error was thrown.
 * `timings` - same as in response field (but maybe some timings will be missing because the error occurred before corresponding phases).
+* `timingPhases` - same as in response field (but maybe some timingPhases will be missing because the error occurred before corresponding phases).
 * `timeout` - (only in `TimeoutError`) value of timeout option.
 * `cause` - (only in `NetworkError`) error object, thrown by core `http` module.
 
