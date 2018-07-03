@@ -112,6 +112,12 @@ test('response fields', async t => {
     t.true('connect' in res.timings);
     t.true('responce' in res.timings);
     t.true('end' in res.timings);
+    t.true('wait' in res.timingPhases);
+    t.true('dns' in res.timingPhases);
+    t.true('tcp' in res.timingPhases);
+    t.true('responce' in res.timingPhases);
+    t.true('read' in res.timingPhases);
+    t.true('total' in res.timingPhases);
     t.true('sent' in res.bytes);
     t.true('received' in res.bytes);
 });
@@ -124,9 +130,11 @@ test('HTTPS', async t => {
     await ss.listen(1704);
     await scra('https://localhost:1704').then(res => {
         t.true('secureConnect' in res.timings);
+        t.true('tls' in res.timingPhases);
     });
     await scra({url: 'https://localhost:1704', proxy: 'localhost:3128'}).then(res => {
         t.true('secureConnect' in res.timings);
+        t.true('tls' in res.timingPhases);
     });
     await ss.close();
 });
