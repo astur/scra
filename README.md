@@ -84,6 +84,7 @@ See more examples in test.
 * `requestTime` - request duration (number of milliseconds).
 * `timings` - detailed timings (timestamps of all request phases).
 * `bytes` - just how many `bytes.sent` and `bytes.received` by this request.
+* `options` - raw `scra` options as string or object.
 
 #### Custom errors
 
