@@ -69,6 +69,15 @@ test('url', async t => {
     await scra('localhost:1703').then(() => t.pass());
     await scra({url: 'http://localhost:1703'}).then(() => t.pass());
     await scra({url: 'http://localhost:1703', proxy: 'localhost:3128'}).then(() => t.pass());
+    await scra({url: 'http://example.com:1234', reverseProxy: 'http://localhost:1703'}).then(() => t.pass());
+    await scra({url: 'http://example.com:1234/text', reverseProxy: 'http://localhost:1703'}).then(() => t.pass());
+    await scra({
+        url: 'http://example.com:1234/text',
+        reverseProxy: {
+            to: 'example.com:1234',
+            from: 'localhost:1703',
+        },
+    }).then(res => t.is(res.body, answer));
     await scra('').then(() => t.fail(), e => {
         t.true(e instanceof URIError);
     });
