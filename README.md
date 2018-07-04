@@ -71,6 +71,7 @@ See more examples in test.
 * `compressed` - Boolean. If `true` set `accept-encoding` header to `'gzip, deflate'`. Defaults to `false`.
 * `timeout` - Number of milliseconds. Time limit for request to be done (if not - error will be thrown). If `timeout` set to `0` it means no time limit. Defaults to `5000`.
 * `proxy` - address of proxy server. It may be both, `http` or `https`, and if protocol is omitted it will be `'http'`. Now `scra` supports proxy via `proxy-agent`, so you can use proxy with `https` sites.
+* `reverseProxy` - object or string, describing how to change target url to reverse-proxy url. If `reverseProxy` is object, target url part is in field `to` and reverse-proxy url part is in field `from`. Actually it is just parameters for `replace` method of url string, so it is possible to use regexp in field `to` and replacement patterns in field `from`. If `reverseProxy` is string, `scra` expects it is url part before path. So, string `'http://reverse-proxy.my.org'` is equal to ooject like `{to: /^https?:\/\/[^/]+(\/)?/i, from: 'http://reverse-proxy.my.org$1'}`
 * `agent` - custom [http](https://nodejs.org/api/http.html#http_class_http_agent)/[https](https://nodejs.org/api/https.html#https_class_https_agent) agent.
 
 #### Response object extra fields:
