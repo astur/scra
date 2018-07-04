@@ -28,7 +28,7 @@ npm install scra
 
 ## Usage
 
-`scra` takes url string or options object as first param and callback function as optional second param. If no callback - `scra` returns promise. Any way `scra` produce response object, same as [http.ClientRequest](https://nodejs.org/api/http.html#http_class_http_clientrequest) but with few extra fields.
+`scra` takes url string or options object as first parameter and callback function as optional second param. If no callback - `scra` returns promise. Any way `scra` produce response object, same as [http.ClientRequest](https://nodejs.org/api/http.html#http_class_http_clientrequest) do, but with few extra fields.
 
 #### Synopsis
 
@@ -62,7 +62,7 @@ See more examples in test.
     }
     ````
 
-    You may set any headers manually. Also 'Host' header will be set by node `http` module, and some headers may be set depending on the other options (see below). Such headers have a high priority over values in `headers` option (be careful, it is not "as usual").
+    You may set any headers manually. Also 'Host' header will be set by node `http` module, and some headers may be set depending on the other options (see below). Such headers have a higher priority over values in `headers` option (be careful, it is not "as usual").
     
     Manually set headers will replace defaults, but will be replaced by headers from options.
 
@@ -70,14 +70,14 @@ See more examples in test.
 * `cookies` - cookies to be sent with request. Key-value object. It will be stringified and placed to `cookie` header.
 * `compressed` - Boolean. If `true` set `accept-encoding` header to `'gzip, deflate'`. Defaults to `false`.
 * `timeout` - Number of milliseconds. Time limit for request to be done (if not - error will be thrown). If `timeout` set to `0` it means no time limit. Defaults to `5000`.
-* `proxy` - address of proxy server. It may be both, `http` or `https`, and if protocol is omitted it will be `'http:'`. Now `scra` supports proxy via `proxy-agent`, so you can use proxy with `https` sites.
+* `proxy` - address of proxy server. It may be both, `http` or `https`, and if protocol is omitted it will be `'http'`. Now `scra` supports proxy via `proxy-agent`, so you can use proxy with `https` sites.
 * `agent` - custom [http](https://nodejs.org/api/http.html#http_class_http_agent)/[https](https://nodejs.org/api/https.html#https_class_https_agent) agent.
 
 #### Response object extra fields:
 
 * `rawBody` - buffer with response body (decompressed if necessary).
 * `charset` - charset part from `content-type` response header.
-* `body` - response body converted to string (using `iconv-lite` if `charset` defined.) If `content-type` response header is `application/json` then `body` will be object parsed from json.
+* `body` - response body converted to string (using `iconv-lite` if `charset` defined.) If `content-type` response header is `application/json` and `body` is valid json string then it will be parsed to object.
 * `cookies` - key-value object with cookies from `cookies` option and from `set-cookie` response header.
 * `url` - same as `url` field in options.
 * `requestHeaders` - object with headers sent with request.
@@ -99,7 +99,7 @@ See more examples in test.
   * `read` - time spent receiving the response data (`timings.end - timings.responce`).
   * `total` - time spent performing all phases of request (`timings.end - timings.start`).
 * `bytes` - just how many `bytes.sent` and `bytes.received` by this request.
-* `options` - raw `scra` options as string or object.
+* `options` - raw `scra` options parameter as string or object.
 
 #### Custom errors
 
@@ -116,7 +116,7 @@ These errors contain several useful additional properties:
 * `errorTime` - timestamp of the moment when error was thrown.
 * `timings` - same as in response field (but maybe some timings will be missing because the error occurred before corresponding phases).
 * `timingPhases` - same as in response field (but maybe some timingPhases will be missing because the error occurred before corresponding phases).
-* `timeout` - (only in `TimeoutError`) value of timeout option.
+* `timeout` - (only in `TimeoutError`) value of `timeout` option.
 * `cause` - (only in `NetworkError`) error object, thrown by core `http` module.
 
 ## License
