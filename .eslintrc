@@ -1,3 +1,8 @@
 {
-    "extends": "astur"
+    "extends": "astur",
+    "rules": {
+        "more/prefer-includes": "off",
+        "global-require": "off",
+        "promise/always-return": "off"
+    }
 }
