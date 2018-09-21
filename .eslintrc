@@ -3,6 +3,7 @@
     "rules": {
         "more/prefer-includes": "off",
         "global-require": "off",
+        "callback-return": "off",
         "promise/always-return": "off"
     }
 }
