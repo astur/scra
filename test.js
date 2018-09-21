@@ -7,7 +7,7 @@ const keyCert = require('key-cert');
 const mockser = require('mockser');
 const s = mockser();
 const answer = 'Lorem ipsum';
-const {TimeoutError, NetworkError} = scra;
+const {TimeoutError, NetworkError, ZlibError} = scra;
 const agent = new (require('http')).Agent({maxFreeSockets: 128});
 
 test.before('setup', async () => {
@@ -53,6 +53,12 @@ test.before('setup', async () => {
         res.setHeader('Content-Type', 'text/plain');
         res.setHeader('Content-Encoding', 'deflate');
         res.end(compressed.deflate);
+    });
+    s.on('/badGzip', (req, res) => {
+        res.setHeader('Response-Accept-Encoding', req.headers['accept-encoding']);
+        res.setHeader('Content-Type', 'text/plain');
+        res.setHeader('Content-Encoding', 'gzip');
+        res.end('badGzip');
     });
     s.on('/cookie', (req, res) => {
         res.setHeader('Set-Cookie', ['a=%34%32; Path=/', 'b="%80"; Path=/']);
@@ -203,6 +209,9 @@ test('Compression', async t => {
     await scra({url: 'localhost:1703/deflate', compressed: true}).then(res => {
         t.is(res.body, answer);
         t.is(res.headers['response-accept-encoding'], 'gzip, deflate');
+    });
+    await scra({url: 'localhost:1703/badGzip', compressed: true}).then(() => t.fail(), e => {
+        t.true(e instanceof ZlibError);
     });
 });
 
