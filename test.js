@@ -155,13 +155,13 @@ test('HTTPS', async t => {
 });
 
 test('POST', async t => {
-    await scra({url: 'localhost:1703/post', data: 'a=1&b=2'}).then(res => {
+    await scra({url: 'localhost:1703/post', data: 'a=1&b=2&c=кирилица'}).then(res => {
         t.is(res.headers['request-content-type'], 'application/x-www-form-urlencoded');
-        t.is(res.body, 'a=1&b=2');
+        t.is(res.body, 'a=1&b=2&c=кирилица');
     });
-    await scra({url: 'localhost:1703/post', data: {a: 1, b: 2}}).then(res => {
+    await scra({url: 'localhost:1703/post', data: {a: 1, b: 2, c: 'кирилица'}}).then(res => {
         t.is(res.headers['request-content-type'], 'application/json');
-        t.is(res.body, '{"a":1,"b":2}');
+        t.is(res.body, '{"a":1,"b":2,"c":"кирилица"}');
     });
     await scra({url: 'localhost:1703/post', data: 'test', headers: {'Content-Type': 'plain/text'}}).then(res => {
         t.is(res.headers['request-content-type'], 'plain/text');
