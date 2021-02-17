@@ -11,7 +11,7 @@
     "url": "https://github.com/astur/scra.git"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10"
   },
   "author": "astur <astur@yandex.ru> (http://kozlov.am/)",
   "dependencies": {
