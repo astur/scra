@@ -22,6 +22,10 @@ test.before('setup', async () => {
         res.setHeader('Request-Content-Type', req.headers['content-type']);
         req.pipe(res);
     });
+    s.on('/headers', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify(req.headers));
+    });
     s.on('/goodJSON', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.end('{"a":1}');
