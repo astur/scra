@@ -74,6 +74,18 @@ test.before('setup', async () => {
     await s.listen(1703);
 });
 
+test('headers', async t => {
+    await scra('http://localhost:1703/headers').then(r => {
+        t.true(r.body && typeof r.body === 'object');
+        t.deepEqual(r.body, {
+            accept: '*/*',
+            connection: 'close',
+            host: 'localhost:1703',
+            'user-agent': 'astur/scra',
+        });
+    });
+});
+
 test('url', async t => {
     await scra('http://localhost:1703').then(() => t.pass());
     await scra('localhost:1703').then(() => t.pass());
