@@ -94,6 +94,16 @@ test('headers', async t => {
             authorization: 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
         });
     });
+    await scra({url: 'http://localhost:1703/headers', headers: {test: 'ok'}}).then(r => {
+        t.true(r.body && typeof r.body === 'object');
+        t.deepEqual(r.body, {
+            accept: '*/*',
+            connection: 'close',
+            host: 'localhost:1703',
+            'user-agent': 'astur/scra',
+            test: 'ok',
+        });
+    });
 });
 
 test('url', async t => {
