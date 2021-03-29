@@ -84,6 +84,16 @@ test('headers', async t => {
             'user-agent': 'astur/scra',
         });
     });
+    await scra('http://username:password@localhost:1703/headers').then(r => {
+        t.true(r.body && typeof r.body === 'object');
+        t.deepEqual(r.body, {
+            accept: '*/*',
+            connection: 'close',
+            host: 'localhost:1703',
+            'user-agent': 'astur/scra',
+            authorization: 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
+        });
+    });
 });
 
 test('url', async t => {
