@@ -74,38 +74,6 @@ test.before('setup', async () => {
     await s.listen(1703);
 });
 
-test('headers', async t => {
-    await scra('http://localhost:1703/headers').then(r => {
-        t.true(r.body && typeof r.body === 'object');
-        t.deepEqual(r.body, {
-            accept: '*/*',
-            connection: 'close',
-            host: 'localhost:1703',
-            'user-agent': 'astur/scra',
-        });
-    });
-    await scra('http://username:password@localhost:1703/headers').then(r => {
-        t.true(r.body && typeof r.body === 'object');
-        t.deepEqual(r.body, {
-            accept: '*/*',
-            connection: 'close',
-            host: 'localhost:1703',
-            'user-agent': 'astur/scra',
-            authorization: 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
-        });
-    });
-    await scra({url: 'http://localhost:1703/headers', headers: {test: 'ok'}}).then(r => {
-        t.true(r.body && typeof r.body === 'object');
-        t.deepEqual(r.body, {
-            accept: '*/*',
-            connection: 'close',
-            host: 'localhost:1703',
-            'user-agent': 'astur/scra',
-            test: 'ok',
-        });
-    });
-});
-
 test('url', async t => {
     await scra('http://localhost:1703').then(() => t.pass());
     await scra('localhost:1703').then(() => t.pass());
@@ -171,6 +139,38 @@ test('response fields', async t => {
     t.true('total' in res.timingPhases);
     t.true('sent' in res.bytes);
     t.true('received' in res.bytes);
+});
+
+test('headers', async t => {
+    await scra('http://localhost:1703/headers').then(r => {
+        t.true(r.body && typeof r.body === 'object');
+        t.deepEqual(r.body, {
+            accept: '*/*',
+            connection: 'close',
+            host: 'localhost:1703',
+            'user-agent': 'astur/scra',
+        });
+    });
+    await scra('http://username:password@localhost:1703/headers').then(r => {
+        t.true(r.body && typeof r.body === 'object');
+        t.deepEqual(r.body, {
+            accept: '*/*',
+            connection: 'close',
+            host: 'localhost:1703',
+            'user-agent': 'astur/scra',
+            authorization: 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=',
+        });
+    });
+    await scra({url: 'http://localhost:1703/headers', headers: {test: 'ok'}}).then(r => {
+        t.true(r.body && typeof r.body === 'object');
+        t.deepEqual(r.body, {
+            accept: '*/*',
+            connection: 'close',
+            host: 'localhost:1703',
+            'user-agent': 'astur/scra',
+            test: 'ok',
+        });
+    });
 });
 
 test('HTTPS', async t => {
